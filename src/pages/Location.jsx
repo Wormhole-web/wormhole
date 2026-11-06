@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import interiorImg from "../img/interior-videoclub.png";
 
 function Location() {
@@ -10,6 +11,36 @@ function Location() {
   const h2 = "mb-3 text-base font-semibold uppercase tracking-wide md:text-xl";
   const field =
     "w-full rounded-lg border border-transparent bg-[#19192b] p-3 text-sm text-white outline-none placeholder:text-[#9999aa] focus:border-[#168cff]";
+
+  const boxRef = useRef(null);
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
+
+    const onScroll = () => {
+      const box = boxRef.current;
+      const img = imgRef.current;
+      if (!box || !img) return;
+
+      const rect = box.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // -1 cuando la foto entra por abajo, 1 cuando sale por arriba
+      const progress = (rect.top + rect.height / 2 - vh / 2) / (vh / 2 + rect.height / 2);
+      const clamped = Math.max(-1, Math.min(1, progress));
+
+      img.style.transform = `translateY(${clamped * -30}px) scale(1.25)`;
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
 
   return (
     <main className="min-h-screen bg-[#080817] px-5 py-5 text-[#f5f5fa] md:px-[5%] md:py-9">
@@ -59,11 +90,14 @@ function Location() {
         {/* NUESTRO ESPACIO */}
         <section className={section}>
           <h2 className={h2}>Así es nuestro espacio</h2>
-          <img
-            src={interiorImg}
-            alt="Interior de Wormhole Videoclub"
-            className="block h-64 w-full rounded-xl object-cover md:h-96"
-          />
+          <div ref={boxRef} className="h-64 w-full overflow-hidden rounded-xl md:h-96">
+            <img
+              ref={imgRef}
+              src={interiorImg}
+              alt="Interior de Wormhole Videoclub"
+              className="h-full w-full object-cover will-change-transform"
+            />
+          </div>
           <p className="mt-2 text-xs text-[#b8b8c5] md:text-sm">
             Un lugar creado para los amantes del séptimo arte.
           </p>
