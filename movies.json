@@ -1,0 +1,101 @@
+
+{
+  "movies": [
+    {
+      "id": "1",
+      "title": "Blade Runner",
+      "year": 1982,
+      "duration": "1 h 57 min",
+      "ageRating": 16,
+      "poster": "/images/blade-runner.jpg"
+    },
+    {
+      "id": "2",
+      "title": "Dune: Parte dos",
+      "year": 2024,
+      "duration": "2 h 46 min",
+      "ageRating": 12,
+      "poster": "/images/dune-parte-dos.jpg"
+    },
+    {
+      "id": "3",
+      "title": "Interstellar",
+      "year": 2014,
+      "duration": "2 h 49 min",
+      "ageRating": 12,
+      "poster": "/images/interstellar.jpg"
+    },
+    {
+      "id": "4",
+      "title": "Matrix",
+      "year": 1999,
+      "duration": "2 h 16 min",
+      "ageRating": 16,
+      "poster": "/images/matrix.jpg"
+    },
+    {
+      "id": "5",
+      "title": "Alien, el octavo pasajero",
+      "year": 1979,
+      "duration": "1 h 57 min",
+      "ageRating": 16,
+      "poster": "/images/alien.jpg"
+    },
+    {
+      "id": "6",
+      "title": "La llegada",
+      "year": 2016,
+      "duration": "1 h 56 min",
+      "ageRating": 7,
+      "poster": "/images/la-llegada.jpg"
+    },
+    {
+      "id": "7",
+      "title": "Regreso al futuro",
+      "year": 1985,
+      "duration": "1 h 56 min",
+      "ageRating": 7,
+      "poster": "/images/regreso-al-futuro.jpg"
+    },
+    {
+      "id": "8",
+      "title": "Avatar",
+      "year": 2009,
+      "duration": "2 h 42 min",
+      "ageRating": 7,
+      "poster": "/images/avatar.jpg"
+    },
+    {
+      "id": "9",
+      "title": "Pobres criaturas",
+      "year": 2023,
+      "duration": "2 h 21 min",
+      "ageRating": 16,
+      "poster": "/images/pobres-criaturas.jpg"
+    },
+    {
+      "id": "10",
+      "title": "Marte (The Martian)",
+      "year": 2015,
+      "duration": "2 h 24 min",
+      "ageRating": 7,
+      "poster": "/images/the-martian.jpg"
+    },
+    {
+      "id": "11",
+      "title": "Ex Machina",
+      "year": 2014,
+      "duration": "1 h 48 min",
+      "ageRating": 16,
+      "poster": "/images/ex-machina.jpg"
+    },
+    {
+      "id": "12",
+      "title": "Jurassic Park",
+      "year": 1993,
+      "duration": "2 h 7 min",
+      "ageRating": 12,
+      "poster": "/images/jurassic-park.jpg"
+    }
+  ]
+}
