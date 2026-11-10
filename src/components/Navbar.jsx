@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import logo from "../img/Logotipo_WORMHOLE.png";
 
 const links = [
   { to: "/", label: "Home" },
@@ -10,6 +11,7 @@ const links = [
 function Navbar() {
   const [open, setOpen] = useState(true);
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
   const linkClass = ({ isActive }) =>
     `text-sm font-medium uppercase tracking-wide transition-colors hover:text-[#F00858] ${
@@ -22,20 +24,13 @@ function Navbar() {
         {/* Logo + botón hamburguesa */}
         <div className="flex items-center justify-between">
           <Link to="/" className="flex flex-col items-center leading-none">
-            <span
-              className="text-4xl font-bold uppercase tracking-wide text-[#F00858] sm:text-5xl"
-              style={{
-                textShadow: "0 0 6px #F00858, 0 0 18px #F00858",
-              }}
-            >
-              Wormhole
-            </span>
-            <span
-              className="mt-1 text-[10px] uppercase tracking-[0.6em] text-[#168BFF]"
-              style={{ textShadow: "0 0 6px #168BFF" }}
-            >
-              Videoclub
-            </span>
+            <Link to="/" className="flex items-center">
+  <img
+    src={logo}
+    alt="Wormhole Videoclub"
+    className="w-52 sm:w-64 h-auto object-contain"
+  />
+</Link>
           </Link>
 
           <button
@@ -94,7 +89,17 @@ function Navbar() {
             <input
               type="text"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => {
+  const value = e.target.value;
+  setSearch(value);
+
+  navigate(
+    value.trim()
+      ? `/movies?search=${encodeURIComponent(value)}`
+      : "/movies",
+    { replace: true }
+  );
+}}
               placeholder="Buscar película..."
               aria-label="Buscar película"
               className="h-10 w-full rounded-full border-2 border-[#168BFF] bg-transparent pl-4 pr-10 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#168BFF]/50"

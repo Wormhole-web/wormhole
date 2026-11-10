@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react"; // NUEVO
-import { getMovies, deleteMovie } from "../services/MovieServices"; // NUEVO
-import data from "../../movies.json";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { deleteMovie, getMovies } from "../services/MovieServices";
 import MovieGrid from "../components/MovieGrid";
 
 function Movies() {
-  // NUEVO
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(false);
+  const [searchParams] = useSearchParams();
+  const search = (searchParams.get("search") || "").trim().toLowerCase();
 
   useEffect(() => {
     getMovies().then(setMovies).catch(() => setError(true));
@@ -16,11 +17,17 @@ function Movies() {
     if (!window.confirm("¿Eliminar esta película?")) return;
     try {
       await deleteMovie(id);
-      setMovies((prev) => prev.filter((m) => m.id !== id));
+      setMovies((previousMovies) =>
+        previousMovies.filter((movie) => movie.id !== id)
+      );
     } catch {
       alert("No se pudo eliminar");
     }
   };
+
+  const filteredMovies = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(search)
+  );
 
   return (
     <main className="min-h-screen bg-black px-4 pb-12 pt-8 sm:px-8 lg:px-16">
@@ -30,7 +37,14 @@ function Movies() {
         </p>
       )}
 
-      <MovieGrid movies={movies} onDelete={handleDelete} />
+      {filteredMovies.length > 0 ? (
+        <MovieGrid movies={filteredMovies} onDelete={handleDelete} />
+      ) : (
+        <p className="py-16 text-center text-[#90E7FB]">
+          No se encontraron películas.
+        </p>
+      )}
+
       <hr className="mx-auto mt-10 max-w-6xl border-0 border-t border-[#F00858]" />
     </main>
   );
