@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import logo from "../img/Logotipo_WORMHOLE.png";
+import logo from "../img/logo-new.webp";
 
 const links = [
   { to: "/", label: "Home" },
-  { to: "/movies", label: "Películas" },
-  { to: "/location", label: "Ubicación" },
+  { to: "/movies", label: "Peliculas" },
+  { to: "/location", label: "Ubicacion" },
 ];
 
 function Navbar() {
@@ -14,9 +14,9 @@ function Navbar() {
   const navigate = useNavigate();
 
   const linkClass = ({ isActive }) =>
-    `text-sm font-medium uppercase tracking-wide transition-colors hover:text-[#F00858] ${
-      isActive ? "text-[#F00858]" : "text-[#90E7FB]"
-    }`;
+  `font-['WormholeFont'] text-l font-medium uppercase tracking-wide transition-colors hover:text-[#F00858] ${
+    isActive ? "text-[#F00858]" : "text-[#90E7FB]"
+  }`;
 
   return (
     <header className="bg-black px-4 pb-4 pt-6 sm:px-8 lg:px-16">

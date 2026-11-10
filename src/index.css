@@ -1,1 +1,7 @@
 @import "tailwindcss";
+@font-face {
+  font-family: "WormholeFont";
+  src: url("./src/font/Rocket Rinder.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}

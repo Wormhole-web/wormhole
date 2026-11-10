@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import emblema from "./img/Emblema.png";
+import emblema from "./img/logo-w.png";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";

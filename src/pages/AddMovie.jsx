@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import interiorImg from "../img/interior-videoclub.png";
-import logo from "../img/Logotipo_WORMHOLE.png"
+import logo from "../img/logo-new.webp";
 import '../index.css'
 import '../AddMovies.css'
 
