@@ -1,45 +1,31 @@
 import { useState, useEffect, useRef } from 'react';
-
-// Imágenes en src/img/covers
-import hopeImg from '../img/covers/hope.jpg';
-import clayfaceImg from '../img/covers/clayface.jpg';
-import interstellarImg from '../img/covers/interstellar.jpg';
-import godzillaImg from '../img/covers/godzilla.jpg';
-import hungerGamesImg from '../img/covers/hunger-games.jpg';
-import avengersImg from '../img/covers/avengers.jpg';
-
-const slides = [
-  ['TU PRÓXIMO UNIVERSO EMPIEZA AQUÍ', 'El cine nos <span class="text-[#ff1768]">une</span>', 'Historias que atraviesan galaxias. Experiencias que se quedan contigo.'],
-  ['EXPLORA NUESTRO CATÁLOGO', 'Descubre <span class="text-[#ff1768]">nuevos mundos</span>', 'Desde los clásicos hasta los estrenos más esperados.'],
-  ['EXPERIENCIAS ÚNICAS', 'Más que una <span class="text-[#ff1768]">pantalla</span>', 'DVD, Blu-ray, 3D y sonido envolvente te esperan.'],
-  ['BIENVENIDO A WORMHOLE', 'Tu próxima <span class="text-[#ff1768]">película</span>', 'Explora el catálogo y encuentra algo que te sorprenda.']
-];
-
-const featuredMovies = [
-  { title: 'Hope', description: 'Una aventura de ciencia ficción llena de misterio y descubrimientos.', img: hopeImg },
-  { title: 'Clayface', description: 'Una historia oscura sobre identidad, transformación y secretos.', img: clayfaceImg },
-  { title: 'Interstellar', description: 'Un viaje espacial sobre la exploración, el tiempo y los vínculos humanos.', img: interstellarImg },
-];
-
-const latestMovies = [
-  { title: 'Godzilla Minus One', description: 'Una nueva aventura de monstruos gigantes y supervivencia.', img: godzillaImg },
-  { title: 'Los juegos del hambre: Amanecer en la cosecha', description: 'Una nueva historia ambientada en el universo de Panem.', img: hungerGamesImg },
-  { title: 'Vengadores: Doomsday', description: 'Los héroes se enfrentan a una amenaza que pone todo en juego.', img: avengersImg },
-];
+import moviesData from '../../movies.json'; // Ajusta la ruta a tu movies.json
 
 export default function Home() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [movies, setMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [modal, setModal] = useState({ open: false, title: '', content: null });
   const [toast, setToast] = useState({ show: false, message: '' });
   const toastTimer = useRef(null);
 
-  const filteredFeatured = featuredMovies.filter(m =>
+  useEffect(() => {
+    if (moviesData && moviesData.movies) {
+      setMovies(moviesData.movies);
+    }
+  }, []);
+
+  // Filtrado general por buscador si escriben algo
+  const filteredMovies = movies.filter(m =>
     m.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
-  const filteredLatest = latestMovies.filter(m =>
-    m.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+
+  // APARTADO 1: Tendencias cinematográficas (Tomamos exactamente las primeras 9 películas)
+  const trendingMovies = filteredMovies.slice(0, 9);
+
+  // APARTADO 2: Últimas incorporaciones (Tomamos exactamente las siguientes 9 películas, sin repetir con las de arriba)
+  const latestMovies = [...filteredMovies]
+    .sort((a, b) => b.year - a.year)
+    .slice(9, 18);
 
   const openModal = (title, content) => setModal({ open: true, title, content });
   const closeModal = () => setModal({ open: false, title: '', content: null });
@@ -49,121 +35,85 @@ export default function Home() {
     if (track) track.scrollBy({ left: direction * (track.clientWidth * 0.8), behavior: 'smooth' });
   };
 
-  useEffect(() => {
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-  }, []);
-
   return (
     <div className="min-h-screen bg-[#03050c] text-[#edf5ff] font-['Rajdhani',sans-serif] tracking-wide">
       <main>
-        {/* HERO */}
-        <section className="h-[410px] relative grid place-items-center text-center overflow-hidden
-          bg-[radial-gradient(ellipse_at_50%_65%,#123c5c_0,transparent_36%),radial-gradient(ellipse_at_50%_10%,#17142f_0,transparent_48%),linear-gradient(120deg,#080b16,#03050c_65%,#0a1424)]
-          max-[620px]:h-[320px]">
-          
-          {/* Órbitas decorativas */}
-          <div className="absolute w-[460px] h-[460px] border border-[#087cb855] rounded-full scale-y-[0.28] -rotate-[25deg] shadow-[0_0_35px_#00aaff22]"></div>
-          <div className="absolute w-[590px] h-[590px] border border-[#087cb855] rounded-full scale-y-[0.28] -rotate-[25deg] shadow-[0_0_35px_#00aaff22]"></div>
-
-          <div className="relative z-10 px-4 max-[620px]:px-[18px]">
-            <p className="text-[11px] tracking-[3px] text-[#00aeff] mb-3 uppercase">{slides[currentSlide][0]}</p>
-            <h1
-              className="font-['Orbitron',sans-serif] text-[clamp(28px,5vw,48px)] font-bold leading-tight mb-3"
-              dangerouslySetInnerHTML={{ __html: slides[currentSlide][1] }}
-            />
-            <p className="text-[#91a7bb] text-lg mb-6 max-w-md mx-auto max-[620px]:text-base">
-              {slides[currentSlide][2]}
-            </p>
-            <a
-              href="#peliculas"
-              className="inline-flex items-center gap-2 px-6 py-2.5 border border-[#00aeff] rounded text-[#00aeff] text-sm uppercase tracking-wider hover:bg-[#00aeff15] transition-colors"
-            >
-              Explorar películas <b>→</b>
-            </a>
-          </div>
-
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2.5">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => setCurrentSlide(i)}
-                className={`w-2.5 h-2.5 rounded-full border border-[#00aeff] transition-colors ${
-                  currentSlide === i ? 'bg-[#00aeff]' : 'bg-transparent'
-                }`}
-                aria-label={`Diapositiva ${i + 1}`}
-              />
-            ))}
-          </div>
-        </section>
-
-        {/* PELÍCULAS DESTACADAS */}
-        <section className="py-10 max-w-[1200px] mx-auto px-6" id="peliculas">
-          <div className="flex items-end justify-between mb-6">
-            <div>
-              <p className="text-[11px] tracking-[3px] text-[#00aeff] uppercase mb-1">NO TE LAS PIERDAS</p>
-              <h2 className="font-['Orbitron',sans-serif] text-xl">Películas destacadas</h2>
-            </div>
+        {/* 1. TENDENCIAS CINEMATOGRÁFICAS (Primeras 9 películas) */}
+        <section className="py-8 max-w-[1400px] mx-auto px-6">
+          <div className="flex items-end justify-between mb-4">
+            <h2 className="font-['Orbitron',sans-serif] text-xl text-white">Tendencias cinematográficas</h2>
             <div className="flex gap-2">
-              <button type="button" onClick={() => scrollTrack('featuredTrack', -1)} className="w-9 h-9 border border-[#00aeff] rounded text-[#00aeff] hover:bg-[#00aeff20] transition-colors">←</button>
-              <button type="button" onClick={() => scrollTrack('featuredTrack', 1)} className="w-9 h-9 border border-[#00aeff] rounded text-[#00aeff] hover:bg-[#00aeff20] transition-colors">→</button>
+              <button type="button" onClick={() => scrollTrack('netflixTrack', -1)} className="w-9 h-9 border border-[#ff1768] rounded text-[#ff1768] hover:bg-[#ff176820] transition-colors">←</button>
+              <button type="button" onClick={() => scrollTrack('netflixTrack', 1)} className="w-9 h-9 border border-[#ff1768] rounded text-[#ff1768] hover:bg-[#ff176820] transition-colors">→</button>
             </div>
           </div>
 
-          <div id="featuredTrack" className="flex gap-4 overflow-x-auto pb-4 scroll-smooth scrollbar-hide">
-            {filteredFeatured.map((movie) => (
+          <div id="netflixTrack" className="flex gap-4 overflow-x-auto pb-4 scroll-smooth scrollbar-hide">
+            {trendingMovies.map((movie) => (
               <button
-                key={movie.title}
+                key={`trending-${movie.id || movie.title}`}
                 type="button"
-                onClick={() => openModal(movie.title, movie.description)}
-                className="flex-shrink-0 basis-[180px] min-[900px]:basis-[220px] text-left group"
+                onClick={() => openModal(movie.title, `${movie.year} • ${movie.duration}`)}
+                className="flex-shrink-0 basis-[180px] min-[900px]:basis-[210px] text-left group cursor-pointer"
               >
-                <img
-                  src={movie.img}
-                  alt={`Cartel de ${movie.title}`}
-                  className="w-full h-[250px] min-[900px]:h-[300px] object-cover rounded-lg mb-2 group-hover:opacity-80 transition-opacity"
-                />
-                <span className="text-sm text-[#edf5ff]">{movie.title}</span>
+                <div className="border-2 border-[#ff1768] rounded-2xl overflow-hidden mb-2 group-hover:scale-[1.02] transition-transform shadow-[0_0_15px_#ff176833]">
+                  <img
+                    src={movie.poster}
+                    alt={movie.title}
+                    className="w-full h-[260px] min-[900px]:h-[310px] object-cover"
+                  />
+                </div>
+                <div className="flex items-start justify-between">
+                  <span className="text-sm font-semibold text-[#00aeff]">{movie.title}</span>
+                  <span className="text-[10px] px-1.5 py-0.5 bg-[#111] border border-[#333] rounded text-gray-300">
+                    {movie.ageRating || movie.age || '12'}
+                  </span>
+                </div>
+                <p className="text-xs text-gray-400 mt-0.5">{movie.year} • {movie.duration}</p>
               </button>
             ))}
           </div>
         </section>
 
-        {/* ÚLTIMAS INCORPORACIONES */}
-        <section className="py-6 max-w-[1200px] mx-auto px-6">
-          <div className="flex items-end justify-between mb-6">
-            <div>
-              <p className="text-[11px] tracking-[3px] text-[#00aeff] uppercase mb-1">RECIÉN LLEGADAS</p>
-              <h2 className="font-['Orbitron',sans-serif] text-xl">Últimas incorporaciones</h2>
-            </div>
+        {/* 2. ÚLTIMAS INCORPORACIONES (Siguientes 9 películas sin repetir) */}
+        <section className="py-8 max-w-[1400px] mx-auto px-6">
+          <div className="flex items-end justify-between mb-4">
+            <h2 className="font-['Orbitron',sans-serif] text-xl text-white">Últimas incorporaciones</h2>
             <div className="flex gap-2">
               <button type="button" onClick={() => scrollTrack('latestTrack', -1)} className="w-9 h-9 border border-[#00aeff] rounded text-[#00aeff] hover:bg-[#00aeff20] transition-colors">←</button>
               <button type="button" onClick={() => scrollTrack('latestTrack', 1)} className="w-9 h-9 border border-[#00aeff] rounded text-[#00aeff] hover:bg-[#00aeff20] transition-colors">→</button>
             </div>
           </div>
 
-          <div id="latestTrack" className="flex gap-4 overflow-x-auto pb-4 scroll-smooth">
-            {filteredLatest.map((movie) => (
-              <button
-                key={movie.title}
-                type="button"
-                onClick={() => openModal(movie.title, movie.description)}
-                className="flex-shrink-0 basis-[180px] min-[900px]:basis-[220px] text-left group"
-              >
-                <img
-                  src={movie.img}
-                  alt={`Cartel de ${movie.title}`}
-                  className="w-full h-[250px] min-[900px]:h-[300px] object-cover rounded-lg mb-2 group-hover:opacity-80 transition-opacity"
-                />
-                <span className="text-sm text-[#edf5ff]">{movie.title}</span>
-              </button>
-            ))}
+          <div id="latestTrack" className="flex gap-4 overflow-x-auto pb-4 scroll-smooth scrollbar-hide">
+            {latestMovies.length > 0 ? (
+              latestMovies.map((movie) => (
+                <button
+                  key={`latest-${movie.id || movie.title}`}
+                  type="button"
+                  onClick={() => openModal(movie.title, `${movie.year} • ${movie.duration}`)}
+                  className="flex-shrink-0 basis-[180px] min-[900px]:basis-[210px] text-left group cursor-pointer"
+                >
+                  <div className="border-2 border-[#00aeff] rounded-2xl overflow-hidden mb-2 group-hover:scale-[1.02] transition-transform shadow-[0_0_15px_#00aaff33]">
+                    <img
+                      src={movie.poster}
+                      alt={movie.title}
+                      className="w-full h-[260px] min-[900px]:h-[310px] object-cover"
+                    />
+                  </div>
+                  <div className="flex items-start justify-between">
+                    <span className="text-sm font-semibold text-[#00aeff]">{movie.title}</span>
+                    <span className="text-[10px] px-1.5 py-0.5 bg-[#111] border border-[#333] rounded text-gray-300">
+                      {movie.ageRating || movie.age || '12'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-400 mt-0.5">{movie.year} • {movie.duration}</p>
+                </button>
+              ))
+            ) : (
+              <p className="text-xs text-gray-400">Agrega más películas en tu JSON para ver contenido en este apartado.</p>
+            )}
           </div>
-
-          {filteredFeatured.length + filteredLatest.length === 0 && (
-            <p className="text-center text-[#91a7bb] mt-4">No se encontraron películas. Prueba con otro título.</p>
-          )}
         </section>
 
         {/* SERVICIOS */}
