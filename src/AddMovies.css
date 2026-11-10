@@ -20,7 +20,11 @@
   box-sizing: border-box;
 }
 
-/* ---------- Cabecera ---------- */
+body {
+  margin: 0;
+  background: #07070f;
+}
+
 .add-movie__breadcrumb {
   display: flex;
   align-items: center;
@@ -48,7 +52,6 @@
   color: #d3d3e0;
 }
 
-/* ---------- Tarjeta de portada ---------- */
 .add-movie__cover-card {
   border: 2px solid var(--pink);
   border-radius: 14px;
@@ -120,7 +123,6 @@
   display: block;
 }
 
-/* ---------- Campos ---------- */
 .add-movie__field {
   margin-bottom: 14px;
 }
@@ -150,7 +152,7 @@
 .add-movie textarea {
   width: 100%;
   background: var(--field);
-  color: #fff;
+  color: #000;
   border: 1px solid transparent;
   border-radius: 10px;
   padding: 0 12px;
@@ -215,7 +217,6 @@
   pointer-events: none;
 }
 
-/* ---------- Botones ---------- */
 .add-movie__btn {
   display: block;
   width: 100%;
