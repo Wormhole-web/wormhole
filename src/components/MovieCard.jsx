@@ -1,4 +1,6 @@
-function MovieCard({ movie }) {
+import { Link } from "react-router-dom";
+
+function MovieCard({ movie, onDelete }) {
   const { title, year, duration, ageRating, poster } = movie;
 
   return (
@@ -25,6 +27,19 @@ function MovieCard({ movie }) {
         <span className="shrink-0 rounded border border-gray-500 px-1 text-[10px] leading-4 text-gray-400">
           {ageRating}
         </span>
+      </div>
+
+      <div className="flex gap-3 text-[11px]">
+        <Link to={`/edit-movie/${movie.id}`} className="text-[#90E7FB] hover:underline">
+          Editar
+        </Link>
+        <button
+          type="button"
+          onClick={() => onDelete(movie.id)}
+          className="cursor-pointer text-[#F00858] hover:underline"
+        >
+          Eliminar
+        </button>
       </div>
     </article>
   );
