@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 import interiorImg from "../img/interior-videoclub.png";
 
