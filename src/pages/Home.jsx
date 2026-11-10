@@ -28,14 +28,11 @@ const latestMovies = [
 ];
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [modal, setModal] = useState({ open: false, title: '', content: null });
   const [toast, setToast] = useState({ show: false, message: '' });
   const toastTimer = useRef(null);
-
-  const allMovies = [...featuredMovies, ...latestMovies];
 
   const filteredFeatured = featuredMovies.filter(m =>
     m.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -44,23 +41,8 @@ export default function Home() {
     m.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const notify = (message) => {
-    setToast({ show: true, message });
-    clearTimeout(toastTimer.current);
-    toastTimer.current = setTimeout(() => setToast({ show: false, message: '' }), 2600);
-  };
-
   const openModal = (title, content) => setModal({ open: true, title, content });
   const closeModal = () => setModal({ open: false, title: '', content: null });
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    const count = allMovies.filter(m =>
-      m.title.toLowerCase().includes(searchQuery.toLowerCase())
-    ).length;
-    notify(searchQuery.trim() ? `${count} película(s) encontrada(s)` : 'Mostrando todas las películas');
-    document.getElementById('peliculas')?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   const scrollTrack = (id, direction) => {
     const track = document.getElementById(id);
@@ -74,53 +56,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#03050c] text-[#edf5ff] font-['Rajdhani',sans-serif] tracking-wide">
-      {/* HEADER */}
-      <header className="bg-[#020309] border-b border-[#06436a]" id="inicio">
-        <div className="h-[84px] flex items-center justify-center relative max-[620px]:h-[68px] max-[620px]:justify-start max-[620px]:pl-5">
-          <a href="#inicio" className="flex flex-col items-center text-[#ff1768] font-['Orbitron',sans-serif]">
-            <span className="text-[clamp(24px,4vw,36px)] font-semibold tracking-tighter drop-shadow-[0_0_12px_#ff176899] max-[620px]:text-[25px]">
-              WORMHOLE
-            </span>
-            <span className="text-[9px] text-[#00aeff] tracking-[5px] max-[620px]:text-[7px]">
-              V I D E O C L U B
-            </span>
-          </a>
-
-          <button
-            className="hidden max-[620px]:block absolute right-[5%] top-[25px] bg-transparent border-0 p-[5px]"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-expanded={menuOpen}
-            type="button"
-          >
-            <span className="block w-6 h-0.5 bg-[#ff1768] my-[5px]"></span>
-            <span className="block w-6 h-0.5 bg-[#ff1768] my-[5px]"></span>
-            <span className="block w-6 h-0.5 bg-[#ff1768] my-[5px]"></span>
-          </button>
-        </div>
-
-        <nav className={`
-          h-12 max-w-[1200px] mx-auto px-6 flex items-center gap-8
-          max-[620px]:${menuOpen ? 'flex' : 'hidden'} max-[620px]:h-auto max-[620px]:flex-wrap max-[620px]:gap-4 max-[620px]:px-5 max-[620px]:pb-[18px]
-        `}>
-          <a href="#inicio" onClick={() => setMenuOpen(false)} className="text-[13px] uppercase text-[#b9eaff] hover:text-[#ff1768] transition-colors max-[620px]:text-xs">Inicio</a>
-          <a href="#peliculas" onClick={() => setMenuOpen(false)} className="text-[13px] uppercase text-[#b9eaff] hover:text-[#ff1768] transition-colors max-[620px]:text-xs">Películas</a>
-          <a href="#ubicacion" onClick={() => setMenuOpen(false)} className="text-[13px] uppercase text-[#b9eaff] hover:text-[#ff1768] transition-colors max-[620px]:text-xs">Ubicación</a>
-          <a href="#" className="text-[23px] text-[#b9eaff] hover:text-[#ff1768]" aria-label="Más información">⊕</a>
-
-          <form onSubmit={handleSearch} className="ml-auto w-[220px] h-8 border border-[#00aeff] rounded-full flex overflow-hidden max-[620px]:w-full max-[620px]:ml-0">
-            <input
-              type="search"
-              placeholder="Buscar película..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="flex-1 min-w-0 bg-transparent border-0 outline-none text-white px-3"
-              aria-label="Buscar película"
-            />
-            <button type="submit" className="w-[38px] bg-transparent border-0 text-[#00aeff] text-2xl cursor-pointer" aria-label="Buscar">⌕</button>
-          </form>
-        </nav>
-      </header>
-
       <main>
         {/* HERO */}
         <section className="h-[410px] relative grid place-items-center text-center overflow-hidden
@@ -268,54 +203,6 @@ export default function Home() {
         </section>
       </main>
 
-      {/* FOOTER */}
-      <footer className="bg-[#020309] border-t border-[#06436a] pt-10 pb-6" id="ubicacion">
-        <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-2 md:grid-cols-3 gap-8 mb-8">
-          <div>
-            <h2 className="text-xs tracking-widest text-[#00aeff] uppercase mb-3">Navegación</h2>
-            <div className="flex flex-col gap-1.5 text-sm">
-              <a href="#inicio" className="hover:text-[#ff1768] transition-colors">Inicio</a>
-              <a href="#peliculas" className="hover:text-[#ff1768] transition-colors">Catálogo</a>
-              <a href="#ubicacion" className="hover:text-[#ff1768] transition-colors">Ubicación</a>
-            </div>
-          </div>
-          <div>
-            <h2 className="text-xs tracking-widest text-[#00aeff] uppercase mb-3">Información</h2>
-            <div className="flex flex-col gap-1.5 text-sm">
-              <a href="#" className="hover:text-[#ff1768] transition-colors">Nuestra empresa</a>
-              <a href="#" className="hover:text-[#ff1768] transition-colors">Contacto</a>
-              <a href="#" className="hover:text-[#ff1768] transition-colors">Términos y condiciones</a>
-              <a href="#" className="hover:text-[#ff1768] transition-colors">Política de privacidad</a>
-            </div>
-          </div>
-          <div className="col-span-2 md:col-span-1">
-            <h2 className="text-xs tracking-widest text-[#00aeff] uppercase mb-3">Síguenos</h2>
-            <div className="flex gap-3">
-              {['◎', '𝕏', 'f', '▷'].map((icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="w-9 h-9 border border-[#00aeff] rounded flex items-center justify-center text-[#00aeff] hover:bg-[#00aeff20] transition-colors"
-                >
-                  {icon}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-[#91a7bb]">
-          <p>© <span id="year"></span> Wormhole VideoClub. Todos los derechos reservados.</p>
-          <div className="flex items-center gap-2 tracking-widest">
-            <span className="w-6 h-px bg-[#00aeff]"></span>
-            <b className="text-[#00aeff] text-xl">◉</b>
-            <span className="text-[10px]">EL CINE NOS UNE</span>
-            <span className="w-6 h-px bg-[#00aeff]"></span>
-          </div>
-        </div>
-      </footer>
-
-      {/* MODAL */}
       {modal.open && (
         <div
           className="fixed inset-0 z-50 bg-black/80 grid place-items-center p-4"
@@ -351,3 +238,5 @@ export default function Home() {
         </div>
       )}
     </div>
+  );
+}
