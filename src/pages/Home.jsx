@@ -1,3 +1,4 @@
+import Hero from "../components/Hero";
 import { useState, useEffect, useRef } from 'react';
 import moviesData from '../../movies.json'; // Ajusta la ruta a tu movies.json
 
@@ -38,10 +39,11 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#03050c] text-[#edf5ff] font-['Rajdhani',sans-serif] tracking-wide">
       <main>
+      <Hero />
         {/* 1. TENDENCIAS CINEMATOGRÁFICAS (Primeras 9 películas) */}
         <section className="py-8 max-w-[1400px] mx-auto px-6">
           <div className="flex items-end justify-between mb-4">
-            <h2 className="font-['Orbitron',sans-serif] text-xl text-white">Tendencias cinematográficas</h2>
+            <h2 className="font-['WormholeFont'] text-xl text-[#90E7FB]">Tendencias cinematograficas</h2>
             <div className="flex gap-2">
               <button type="button" onClick={() => scrollTrack('netflixTrack', -1)} className="w-9 h-9 border border-[#ff1768] rounded text-[#ff1768] hover:bg-[#ff176820] transition-colors">←</button>
               <button type="button" onClick={() => scrollTrack('netflixTrack', 1)} className="w-9 h-9 border border-[#ff1768] rounded text-[#ff1768] hover:bg-[#ff176820] transition-colors">→</button>
@@ -78,7 +80,7 @@ export default function Home() {
         {/* 2. ÚLTIMAS INCORPORACIONES (Siguientes 9 películas sin repetir) */}
         <section className="py-8 max-w-[1400px] mx-auto px-6">
           <div className="flex items-end justify-between mb-4">
-            <h2 className="font-['Orbitron',sans-serif] text-xl text-white">Últimas incorporaciones</h2>
+            <h2 className="font-['WormholeFont'] text-xl text-[#90E7FB]">Ultimas incorporaciones</h2>
             <div className="flex gap-2">
               <button type="button" onClick={() => scrollTrack('latestTrack', -1)} className="w-9 h-9 border border-[#00aeff] rounded text-[#00aeff] hover:bg-[#00aeff20] transition-colors">←</button>
               <button type="button" onClick={() => scrollTrack('latestTrack', 1)} className="w-9 h-9 border border-[#00aeff] rounded text-[#00aeff] hover:bg-[#00aeff20] transition-colors">→</button>
@@ -120,17 +122,17 @@ export default function Home() {
         <section className="py-12 max-w-[1200px] mx-auto px-6">
           <div className="text-center mb-10">
             <p className="text-[11px] tracking-[3px] text-[#00aeff] uppercase mb-2">MÁS QUE UNA PANTALLA</p>
-            <h2 className="font-['Orbitron',sans-serif] text-2xl mb-3">Mucho más que cine</h2>
+            <h2 className="font-['WormholeFont'] text-2xl mb-3 text-[#90E7FB]">Mucho mas que cine</h2>
             <p className="text-[#91a7bb] max-w-lg mx-auto">
               De los clásicos al cine actual, descubre un universo de películas, formatos y experiencias cinematográficas.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10 text-[#90E7FB]">
             {[
               { icon: '◎', title: 'DVD y Blu-ray', desc: 'Colecciona tus favoritos.' },
               { icon: '◉', title: 'Cine en 3D', desc: 'Vive otra dimensión.' },
-              { icon: '▣', title: 'Alta definición', desc: 'Detalles que impresionan.' },
+              { icon: '▣', title: 'Alta definición' , desc: 'Detalles que impresionan.' },
               { icon: '♫', title: 'Sonido envolvente', desc: 'Sumérgete en cada historia.' },
             ].map((s) => (
               <article key={s.title} className="flex gap-3 items-start">
@@ -146,7 +148,7 @@ export default function Home() {
           <button
             type="button"
             onClick={() => openModal('Alquila tu sala', 'Formulario de reserva próximamente.')}
-            className="mx-auto block px-8 py-3 border border-[#ff1768] text-[#ff1768] text-sm tracking-wider uppercase hover:bg-[#ff176815] transition-colors"
+            className="mx-auto block px-8 py-3 border rounded-full border-[#ff1768] text-[#ff1768] text-sm tracking-wider font-['WormholeFont'] uppercase hover:bg-[#ff176815] transition-colors"
           >
             DEL PASADO AL FUTURO, EL CINE TE ESPERA. <span>→</span>
           </button>
@@ -190,3 +192,4 @@ export default function Home() {
     </div>
   );
 }
+
