@@ -1,3 +1,4 @@
+import Hero from "../components/Hero";
 import { useState, useEffect, useRef } from 'react';
 import moviesData from '../../movies.json'; // Ajusta la ruta a tu movies.json
 
@@ -38,6 +39,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#03050c] text-[#edf5ff] font-['Rajdhani',sans-serif] tracking-wide">
       <main>
+      <Hero />
         {/* 1. TENDENCIAS CINEMATOGRÁFICAS (Primeras 9 películas) */}
         <section className="py-8 max-w-[1400px] mx-auto px-6">
           <div className="flex items-end justify-between mb-4">
@@ -190,3 +192,4 @@ export default function Home() {
     </div>
   );
 }
+
