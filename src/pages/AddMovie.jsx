@@ -4,7 +4,6 @@ import logo from "../img/Logotipo_WORMHOLE.png"
 import '../index.css'
 import '../AddMovies.css'
 
-/* ---------- Constantes ---------- */
 
 const GENEROS = [
   "Comedia",
@@ -25,7 +24,6 @@ const INITIAL_FORM = {
   url: "",
 };
 
-/* ---------- Iconos ---------- */
 
 function Icon({ children }) {
   return (
@@ -73,7 +71,6 @@ const ChevronIcon = () => (
   </Icon>
 );
 
-/* ---------- Hook: vista previa de la portada ---------- */
 
 function useCoverPreview() {
   const [file, setFile] = useState(null);
@@ -81,7 +78,6 @@ function useCoverPreview() {
   const [urlPreview, setUrlPreview] = useState("");
   const [loaded, setLoaded] = useState(false);
 
-  // Crea (y libera) la URL temporal del archivo subido
   useEffect(() => {
     if (!file) {
       setFileUrl("");
@@ -94,7 +90,6 @@ function useCoverPreview() {
 
   const src = fileUrl || urlPreview;
 
-  // Cada vez que cambia la imagen, esperamos a que cargue de nuevo
   useEffect(() => {
     setLoaded(false);
   }, [src]);
@@ -111,7 +106,6 @@ function useCoverPreview() {
   return { file, src, loaded, setLoaded, selectFile, setUrlPreview, reset };
 }
 
-/* ---------- Subcomponentes ---------- */
 
 function Field({ id, label, children }) {
   return (
@@ -227,7 +221,6 @@ export default function AddMovie({ onSave = saveMovie, onCancel }) {
       await onSave({
         ...form,
         anio: Number(form.anio),
-        // Un File no se puede guardar en JSON: guardamos solo su nombre
         portada: preview.file ? preview.file.name : null,
       });
       clearForm();

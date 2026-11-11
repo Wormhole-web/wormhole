@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import emblema from "./img/Emblema.png";
+import emblema from "./img/logo-w.png";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -30,6 +30,7 @@ function App() {
         <Route path="/movies" element={<Movies />} />
         <Route path="/add-movie" element={<AddMovie />} />
         <Route path="/location" element={<Location />} />
+        <Route path="/edit-movie/:id" element={<AddMovie />} />
       </Routes>
       <Footer />
     </>

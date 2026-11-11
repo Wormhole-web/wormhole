@@ -1,0 +1,255 @@
+
+/* =====================================
+   HERO INTERSTELLAR - WORMHOLE
+===================================== */
+
+.wormhole-hero {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 1920 / 600;
+
+  overflow: hidden;
+  background: #03050c;
+  color: #edf5ff;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  font-family: "Rajdhani", sans-serif;
+}
+
+/* =====================================
+   CONTENEDOR MULTIMEDIA
+===================================== */
+
+.wormhole-hero__visual {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* =====================================
+   IMAGEN PANORAMICA
+===================================== */
+
+.wormhole-hero__poster {
+  position: absolute;
+  inset: 0;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+
+  z-index: 1;
+  pointer-events: none;
+
+  transition: opacity 0.5s ease;
+}
+
+.wormhole-hero__poster.visible {
+  opacity: 1;
+}
+
+.wormhole-hero__poster.hidden {
+  opacity: 0;
+}
+
+/* =====================================
+   VIDEO
+===================================== */
+
+
+.wormhole-hero__video {
+  position: absolute;
+  inset: 0;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center center;
+
+  z-index: 0;
+  background: #03050c;
+}
+
+
+/* =====================================
+   DEGRADADO SOBRE LA IMAGEN
+===================================== */
+
+.wormhole-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(3, 5, 12, 0.05) 35%,
+    rgba(3, 5, 12, 0.45) 55%,
+    rgba(3, 5, 12, 0.85) 78%,
+    rgba(3, 5, 12, 0.95) 100%
+  );
+}
+
+/* =====================================
+   TEXTO A LA DERECHA
+===================================== */
+
+.wormhole-hero__content {
+  position: relative;
+  z-index: 3;
+
+  width: 380px;
+  max-width: calc(100% - 40px);
+
+  margin-right: max(
+    60px,
+    calc((100vw - 1400px) / 2)
+  );
+
+  padding: 40px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* =====================================
+   TITULO INTERSTELLAR
+===================================== */
+
+.wormhole-hero h1 {
+  margin: 0 0 18px;
+
+  font-family: "WormholeFont", sans-serif;
+  font-size: clamp(26px, 2.5vw, 40px);
+  font-weight: 400;
+  line-height: 1.2;
+
+  color: #edf5ff;
+  white-space: nowrap;
+}
+
+.wormhole-hero h1 span {
+  color: #90E7FB;
+  font-family: inherit;
+}
+
+/* =====================================
+   INFORMACION DE LA PELICULA
+===================================== */
+
+.wormhole-hero__info {
+  margin: 0 0 16px;
+
+  color: #ff1768;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* =====================================
+   DESCRIPCION
+===================================== */
+
+.wormhole-hero__description,
+.wormhole-hero__content > p:not(.wormhole-hero__info) {
+  max-width: 360px;
+  margin: 0;
+
+  color: #c5d0df;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+
+/* =====================================
+   TABLET
+===================================== */
+
+@media (max-width: 900px) {
+  .wormhole-hero {
+    aspect-ratio: auto;
+    min-height: 440px;
+  }
+
+  .wormhole-hero__content {
+    width: 330px;
+    margin-right: 25px;
+  }
+
+  .wormhole-hero h1 {
+    font-size: 28px;
+  }
+}
+
+/* =====================================
+   MOVIL
+===================================== */
+
+@media (max-width: 600px) {
+  .wormhole-hero {
+    aspect-ratio: auto;
+    min-height: 620px;
+
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  .wormhole-hero__poster,
+  .wormhole-hero__video {
+    object-fit: contain;
+    object-position: center top;
+  }
+
+  .wormhole-hero__overlay {
+    background: linear-gradient(
+      0deg,
+      #03050c 0%,
+      rgba(3, 5, 12, 0.95) 30%,
+      rgba(3, 5, 12, 0.25) 65%,
+      transparent 100%
+    );
+  }
+
+  .wormhole-hero__content {
+    width: calc(100% - 44px);
+    max-width: none;
+
+    margin: 0 22px;
+    padding: 35px 0;
+  }
+
+  .wormhole-hero h1 {
+    font-size: clamp(23px, 7vw, 34px);
+    white-space: normal;
+  }
+
+  .wormhole-hero__info {
+    font-size: 12px;
+  }
+
+  .wormhole-hero__description,
+  .wormhole-hero__content > p:not(.wormhole-hero__info) {
+    font-size: 14px;
+  }
+}
