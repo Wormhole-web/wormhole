@@ -44,7 +44,7 @@ function Location() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#080817] px-5 py-5 text-[#f5f5fa] md:px-[5%] md:py-9">
+    <main className="min-h-screen bg-[#000000] px-5 py-5 text-[#f5f5fa] md:px-[5%] md:py-9">
       <div className="w-full">
 
         {/* UBICACIÓN */}
