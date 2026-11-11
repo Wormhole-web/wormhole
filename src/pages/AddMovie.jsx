@@ -182,10 +182,19 @@ function CoverDropzone({ inputRef, preview }) {
 
 /* ---------- Página ---------- */
 
-export default function AddMovie({
-  onSave = (movie) => console.log("Película guardada:", movie),
-  onCancel,
-}) {
+/* Envía la película al servidor de Vite, que la añade a movies.json */
+async function saveMovie(movie) {
+  console.log("Película guardada:", movie);
+  const res = await fetch("/api/movies", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(movie),
+  });
+  if (!res.ok) throw new Error(`No se pudo guardar (${res.status})`);
+  return res.json();
+}
+
+export default function AddMovie({ onSave = saveMovie, onCancel }) {
   const [form, setForm] = useState(INITIAL_FORM);
   const fileInputRef = useRef(null);
   const preview = useCoverPreview();
@@ -195,21 +204,37 @@ export default function AddMovie({
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!e.currentTarget.checkValidity()) {
-      e.currentTarget.reportValidity();
-      return;
-    }
-    onSave({ ...form, anio: Number(form.anio), portada: preview.file });
+  const clearForm = () => {
+    setForm(INITIAL_FORM);
+    preview.reset();
+    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   const handleReset = (e) => {
     e.preventDefault();
-    setForm(INITIAL_FORM);
-    preview.reset();
-    if (fileInputRef.current) fileInputRef.current.value = "";
+    clearForm();
     onCancel?.();
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formEl = e.currentTarget;
+    if (!formEl.checkValidity()) {
+      formEl.reportValidity();
+      return;
+    }
+    try {
+      await onSave({
+        ...form,
+        anio: Number(form.anio),
+        // Un File no se puede guardar en JSON: guardamos solo su nombre
+        portada: preview.file ? preview.file.name : null,
+      });
+      clearForm();
+    } catch (err) {
+      console.error(err);
+      alert("No se pudo guardar la película. Mira la consola.");
+    }
   };
 
   return (
