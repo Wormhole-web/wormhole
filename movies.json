@@ -1,0 +1,171 @@
+
+{
+  "movies": [
+    {
+      "id": "1",
+      "title": "Blade Runner",
+      "year": 1982,
+      "duration": "1 h 57 min",
+      "ageRating": 16,
+      "poster": "src/img/posters/bladerunner.webp",
+      "trailerId": "NRD7WNqd40U"
+    },
+    {
+      "id": "2",
+      "title": "Dune: Parte dos",
+      "year": 2024,
+      "duration": "2 h 46 min",
+      "ageRating": 12,
+      "poster": "src/img/posters/dune2.webp",
+      "trailerId": "Qv7I3wDfFzI"
+    },
+    {
+      "id": "3",
+      "title": "Interstellar",
+      "year": 2014,
+      "duration": "2 h 49 min",
+      "ageRating": 12,
+      "poster": "src/img/posters/interstellar.webp",
+      "trailerId": "iZfVDV4WANg"
+    },
+    {
+      "id": "4",
+      "title": "Matrix",
+      "year": 1999,
+      "duration": "2 h 16 min",
+      "ageRating": 16,
+      "poster": "src/img/posters/matrix.webp",
+      "trailerId": "OM0tSTEQCQA"
+    },
+    {
+      "id": "5",
+      "title": "Alien, el octavo pasajero",
+      "year": 1979,
+      "duration": "1 h 57 min",
+      "ageRating": 16,
+      "poster": "src/img/posters/alien.webp",
+      "trailerId": "qWXBgZ0bR-E"
+    },
+    {
+      "id": "6",
+      "title": "La llegada",
+      "year": 2016,
+      "duration": "1 h 56 min",
+      "ageRating": 7,
+      "poster": "src/img/posters/lallegada.webp",
+      "trailerId": "uWs5lsWXLbo"
+    },
+    {
+      "id": "7",
+      "title": "Regreso al futuro",
+      "year": 1985,
+      "duration": "1 h 56 min",
+      "ageRating": 7,
+      "poster": "src/img/posters/regresoalfuturo.webp",
+      "trailerId": "xxSo8ZEvzE8"
+    },
+    {
+      "id": "8",
+      "title": "Avatar",
+      "year": 2009,
+      "duration": "2 h 42 min",
+      "ageRating": 7,
+      "poster": "src/img/posters/avatar.webp",
+      "trailerId": "AZS_d_hS2dM"
+    },
+    {
+      "id": "9",
+      "title": "Pobres criaturas",
+      "year": 2023,
+      "duration": "2 h 21 min",
+      "ageRating": 16,
+      "poster": "src/img/posters/pobrescriaturas.webp",
+      "trailerId": "SsEojV8hZ9I"
+    },
+    {
+      "id": "10",
+      "title": "Marte (The Martian)",
+      "year": 2015,
+      "duration": "2 h 24 min",
+      "ageRating": 7,
+      "poster": "src/img/posters/marte.webp",
+      "trailerId": "YunRU1tE1X4"
+    },
+    {
+      "id": "11",
+      "title": "Ex Machina",
+      "year": 2014,
+      "duration": "1 h 48 min",
+      "ageRating": 16,
+      "poster": "src/img/posters/ex-machina.webp",
+      "trailerId": "dfo08F3Lz2g"
+    },
+    {
+      "id": "12",
+      "title": "Jurassic Park",
+      "year": 1993,
+      "duration": "2 h 7 min",
+      "ageRating": 12,
+      "poster": "src/img/posters/jurassicpark.webp",
+      "trailerId": "Qh58MgkO2hc"
+    },
+
+{
+  "id": "13",
+  "title": "Los juegos del hambre",
+  "year": 2012,
+  "duration": "2 h 22 min",
+  "ageRating": 12,
+  "poster": "src/img/posters/juegosdelhambre.webp",
+  "trailerId": "XTOoPtRecC0"
+},
+{
+  "id": "14",
+  "title": "El corredor del laberinto",
+  "year": 2014,
+  "duration": "1 h 53 min",
+  "ageRating": 12,
+  "poster": "src/img/posters/elcorredordellaberinto.webp",
+  "trailerId": "RxNV8uAacjU"
+},
+{
+  "id": "15",
+  "title": "Divergente",
+  "year": 2014,
+  "duration": "2 h 19 min",
+  "ageRating": 12,
+  "poster": "src/img/posters/divergente.webp",
+  "trailerId": "nR1qNjgl7jg"
+},
+
+{
+  "id": "16",
+  "title": "The Giver",
+  "year": 2014,
+  "duration": "1 h 37 min",
+  "ageRating": 12,
+  "poster": "src/img/posters/thegiver.webp",
+  "trailerId": "UALPmyXBOi8"
+},
+{
+  "id": "17",
+  "title": "La quinta ola",
+  "year": 2016,
+  "duration": "1 h 52 min",
+  "ageRating": 12,
+  "poster": "src/img/posters/la5ola.webp",
+  "trailerId": "NfxnnSlW39k"
+},
+{
+  "id": "18",
+  "title": "El juego de Ender",
+  "year": 2013,
+  "duration": "1 h 54 min",
+  "ageRating": 12,
+  "poster": "src/img/posters/eljuegodeender.webp",
+  "trailerId": "xFDlBJT93iM"
+}
+
+
+  ]
+}
