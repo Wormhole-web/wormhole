@@ -67,8 +67,6 @@ export default function Hero() {
             onMouseEnter={startTrailer}
             onMouseLeave={stopTrailer}
         >
-            /* IMAGEN Y VIDEO */
-
             <div className="wormhole-hero__visual">
                 <video
                     ref={videoRef}
