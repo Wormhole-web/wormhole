@@ -144,22 +144,106 @@
    TABLET
 ===================================== */
 
-@media (max-width: 900px) {
+
+/* =====================================
+   TABLET: 601px - 900px
+===================================== */
+
+@media (min-width: 601px) and (max-width: 900px) {
 
   .wormhole-hero {
+    width: 100%;
+    height: auto;
+    min-height: 0;
     aspect-ratio: auto;
-    min-height: 440px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    background: #03050c;
   }
 
+  /* Imagen y video */
+
+  .wormhole-hero__visual {
+    position: relative;
+    inset: auto;
+
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1920 / 600;
+
+    overflow: hidden;
+    background: #03050c;
+  }
+
+  .wormhole-hero__poster,
+  .wormhole-hero__video {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .wormhole-hero__poster {
+    z-index: 1;
+  }
+
+  .wormhole-hero__video {
+    z-index: 0;
+  }
+
+  /* Quitamos el degradado lateral */
+
+  .wormhole-hero__overlay {
+    display: none;
+  }
+
+  /* Texto debajo de la imagen */
+
   .wormhole-hero__content {
-    width: 330px;
-    margin-right: 25px;
+    position: relative;
+
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 28px 32px 40px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .wormhole-hero h1 {
-    font-size: 28px;
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.2;
+    margin-bottom: 14px;
+    white-space: normal;
+  }
+
+  .wormhole-hero__info {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  .wormhole-hero__description,
+  .wormhole-hero__content > p:not(.wormhole-hero__info) {
+    width: 100%;
+    max-width: 600px;
+    font-size: 15px;
+    line-height: 1.65;
   }
 }
+
 
 /* =====================================
    MOVIL
