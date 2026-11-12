@@ -7,7 +7,7 @@
       "year": 1982,
       "duration": "1 h 57 min",
       "ageRating": 16,
-      "poster": "src/img/posters/bladerunner.webp",
+      "poster": "/posters/bladerunner.webp",
       "trailerId": "NRD7WNqd40U"
     },
     {
@@ -16,7 +16,7 @@
       "year": 2024,
       "duration": "2 h 46 min",
       "ageRating": 12,
-      "poster": "src/img/posters/dune2.webp",
+      "poster": "/posters/dune2.webp",
       "trailerId": "Qv7I3wDfFzI"
     },
     {
@@ -25,7 +25,7 @@
       "year": 2014,
       "duration": "2 h 49 min",
       "ageRating": 12,
-      "poster": "src/img/posters/interstellar.webp",
+      "poster": "/posters/interstellar.webp",
       "trailerId": "iZfVDV4WANg"
     },
     {
@@ -34,7 +34,7 @@
       "year": 1999,
       "duration": "2 h 16 min",
       "ageRating": 16,
-      "poster": "src/img/posters/matrix.webp",
+      "poster": "/posters/matrix.webp",
       "trailerId": "OM0tSTEQCQA"
     },
     {
@@ -43,7 +43,7 @@
       "year": 1979,
       "duration": "1 h 57 min",
       "ageRating": 16,
-      "poster": "src/img/posters/alien.webp",
+      "poster": "/posters/alien.webp",
       "trailerId": "qWXBgZ0bR-E"
     },
     {
@@ -52,7 +52,7 @@
       "year": 2016,
       "duration": "1 h 56 min",
       "ageRating": 7,
-      "poster": "src/img/posters/lallegada.webp",
+      "poster": "/posters/lallegada.webp",
       "trailerId": "uWs5lsWXLbo"
     },
     {
@@ -61,7 +61,7 @@
       "year": 1985,
       "duration": "1 h 56 min",
       "ageRating": 7,
-      "poster": "src/img/posters/regresoalfuturo.webp",
+      "poster": "/posters/regresoalfuturo.webp",
       "trailerId": "xxSo8ZEvzE8"
     },
     {
@@ -70,7 +70,7 @@
       "year": 2009,
       "duration": "2 h 42 min",
       "ageRating": 7,
-      "poster": "src/img/posters/avatar.webp",
+      "poster": "/posters/avatar.webp",
       "trailerId": "AZS_d_hS2dM"
     },
     {
@@ -79,7 +79,7 @@
       "year": 2023,
       "duration": "2 h 21 min",
       "ageRating": 16,
-      "poster": "src/img/posters/pobrescriaturas.webp",
+      "poster": "/posters/pobrescriaturas.webp",
       "trailerId": "SsEojV8hZ9I"
     },
     {
@@ -88,7 +88,7 @@
       "year": 2015,
       "duration": "2 h 24 min",
       "ageRating": 7,
-      "poster": "src/img/posters/marte.webp",
+      "poster": "/posters/marte.webp",
       "trailerId": "YunRU1tE1X4"
     },
     {
@@ -97,7 +97,7 @@
       "year": 2014,
       "duration": "1 h 48 min",
       "ageRating": 16,
-      "poster": "src/img/posters/ex-machina.webp",
+      "poster": "/posters/ex-machina.webp",
       "trailerId": "dfo08F3Lz2g"
     },
     {
@@ -106,7 +106,7 @@
       "year": 1993,
       "duration": "2 h 7 min",
       "ageRating": 12,
-      "poster": "src/img/posters/jurassicpark.webp",
+      "poster": "/posters/jurassicpark.webp",
       "trailerId": "Qh58MgkO2hc"
     },
 
@@ -116,7 +116,7 @@
   "year": 2012,
   "duration": "2 h 22 min",
   "ageRating": 12,
-  "poster": "src/img/posters/juegosdelhambre.webp",
+  "poster": "/posters/juegosdelhambre.webp",
   "trailerId": "XTOoPtRecC0"
 },
 {
@@ -125,7 +125,7 @@
   "year": 2014,
   "duration": "1 h 53 min",
   "ageRating": 12,
-  "poster": "src/img/posters/elcorredordellaberinto.webp",
+  "poster": "/posters/elcorredordellaberinto.webp",
   "trailerId": "RxNV8uAacjU"
 },
 {
@@ -134,7 +134,7 @@
   "year": 2014,
   "duration": "2 h 19 min",
   "ageRating": 12,
-  "poster": "src/img/posters/divergente.webp",
+  "poster": "/posters/divergente.webp",
   "trailerId": "nR1qNjgl7jg"
 },
 
@@ -144,7 +144,7 @@
   "year": 2014,
   "duration": "1 h 37 min",
   "ageRating": 12,
-  "poster": "src/img/posters/thegiver.webp",
+  "poster": "/posters/thegiver.webp",
   "trailerId": "UALPmyXBOi8"
 },
 {
@@ -153,7 +153,7 @@
   "year": 2016,
   "duration": "1 h 52 min",
   "ageRating": 12,
-  "poster": "src/img/posters/la5ola.webp",
+  "poster": "/posters/la5ola.webp",
   "trailerId": "NfxnnSlW39k"
 },
 {
@@ -162,7 +162,7 @@
   "year": 2013,
   "duration": "1 h 54 min",
   "ageRating": 12,
-  "poster": "src/img/posters/eljuegodeender.webp",
+  "poster": "/posters/eljuegodeender.webp",
   "trailerId": "xFDlBJT93iM"
 }
 
