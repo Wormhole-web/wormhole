@@ -1,12 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import interiorImg from "../img/interior-videoclub.png";
-import logo from "../img/logo-new.webp";
-import { useNavigate, useParams } from "react-router-dom";
-import { addMovie, getMovieById, updateMovie } from "../services/MovieServices";
+import logo from "../img/logo-new.webp"
 import '../index.css'
 import '../AddMovies.css'
 
-/* ---------- Constantes ---------- */
 
 const GENEROS = [
   "Comedia",
@@ -27,16 +24,6 @@ const INITIAL_FORM = {
   url: "",
 };
 
-const toSrc = (p) => (!p || /^(https?:|data:|\/)/.test(p) ? p : `/${p}`);
-
-const fileToDataUrl = (file) =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-/* ---------- Iconos ---------- */
 
 function Icon({ children }) {
   return (
@@ -84,14 +71,12 @@ const ChevronIcon = () => (
   </Icon>
 );
 
-/* ---------- Hook: vista previa de la portada ---------- */
 
 function useCoverPreview() {
   const [file, setFile] = useState(null);
   const [fileUrl, setFileUrl] = useState("");
   const [urlPreview, setUrlPreview] = useState("");
   const [loaded, setLoaded] = useState(false);
-
 
   useEffect(() => {
     if (!file) {
@@ -121,7 +106,6 @@ function useCoverPreview() {
   return { file, src, loaded, setLoaded, selectFile, setUrlPreview, reset };
 }
 
-/* ---------- Subcomponentes ---------- */
 
 function Field({ id, label, children }) {
   return (
@@ -192,82 +176,58 @@ function CoverDropzone({ inputRef, preview }) {
 
 /* ---------- Página ---------- */
 
-export default function AddMovie({ onSave, onCancel }) {
-  const { id } = useParams();
-  const navigate = useNavigate();
+/* Envía la película al servidor de Vite, que la añade a movies.json */
+async function saveMovie(movie) {
+  console.log("Película guardada:", movie);
+  const res = await fetch("/api/movies", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(movie),
+  });
+  if (!res.ok) throw new Error(`No se pudo guardar (${res.status})`);
+  return res.json();
+}
+
+export default function AddMovie({ onSave = saveMovie, onCancel }) {
   const [form, setForm] = useState(INITIAL_FORM);
-  const [current, setCurrent] = useState(null);
   const fileInputRef = useRef(null);
   const preview = useCoverPreview();
-
-
-  useEffect(() => {
-    if (!id) return;
-    getMovieById(id)
-      .then((m) => {
-        setCurrent(m);
-        setForm({
-          titulo: m.title ?? "",
-          anio: m.year ?? "",
-          genero: m.genre ?? "",
-          sinopsis: m.synopsis ?? "",
-          url: /^https?:/.test(m.poster ?? "") ? m.poster : "",
-        });
-        preview.setUrlPreview(toSrc(m.poster));
-      })
-      .catch(() => alert("No se pudo cargar la película"));
-  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!e.currentTarget.checkValidity()) {
-      e.currentTarget.reportValidity();
-      return;
-    }
-
-    if (preview.file && preview.file.size > 500_000) {
-      alert("La imagen pesa demasiado (máx. 500 KB). Usa una más pequeña o pega una URL.");
-      return;
-    }
-
-    try {
-      let poster = current?.poster ?? "";
-      if (preview.file) poster = await fileToDataUrl(preview.file);
-      else if (form.url) poster = form.url;
-
-      const movie = {
-        ...current,
-        title: form.titulo,
-        year: Number(form.anio),
-        genre: form.genero,
-        synopsis: form.sinopsis,
-        poster,
-        duration: current?.duration ?? "—",
-        ageRating: current?.ageRating ?? "—",
-      };
-
-      if (id) await updateMovie(id, movie); // PUT
-      else await addMovie(movie); // POST
-
-      onSave?.(movie);
-      navigate("/movies");
-    } catch {
-      alert("No se pudo guardar. ¿Está corriendo npm run api?");
-    }
+  const clearForm = () => {
+    setForm(INITIAL_FORM);
+    preview.reset();
+    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   const handleReset = (e) => {
     e.preventDefault();
-    setForm(INITIAL_FORM);
-    preview.reset();
-    if (fileInputRef.current) fileInputRef.current.value = "";
+    clearForm();
     onCancel?.();
-    if (id) navigate("/movies");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formEl = e.currentTarget;
+    if (!formEl.checkValidity()) {
+      formEl.reportValidity();
+      return;
+    }
+    try {
+      await onSave({
+        ...form,
+        anio: Number(form.anio),
+        portada: preview.file ? preview.file.name : null,
+      });
+      clearForm();
+    } catch (err) {
+      console.error(err);
+      alert("No se pudo guardar la película. Mira la consola.");
+    }
   };
 
   return (
@@ -277,7 +237,7 @@ export default function AddMovie({ onSave, onCancel }) {
         <span>Películas / Nueva película</span>
       </div>
 
-      <h1 className="add-movie__title">{id ? "Editar película" : "Añadir película"}</h1>
+      <h1 className="add-movie__title">Añadir película</h1>
       <p className="add-movie__subtitle">
         Incorpora una nueva historia a nuestro universo cinematográfico.
       </p>
@@ -360,7 +320,7 @@ export default function AddMovie({ onSave, onCancel }) {
         </Field>
 
         <button className="add-movie__btn add-movie__btn--save" type="submit">
-          {id ? "Guardar cambios" : "+ Guardar película"}
+          + Guardar película
         </button>
         <button className="add-movie__btn add-movie__btn--cancel" type="reset">
           Cancelar
